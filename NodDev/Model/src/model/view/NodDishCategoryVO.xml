@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NodDishCategoryVO"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  SelectList="NodDishCategoryEO.DISH_CATEGORY_ID, 
+       NodDishCategoryEO.DISH_CATEGORY_NAME, 
+       NodDishCategoryEO.DISH_CATEGORY_DESC, 
+       NodDishCategoryEO.SEGMENT1, 
+       NodDishCategoryEO.CREATE_DATE, 
+       NodDishCategoryEO.CREATE_BY, 
+       NodDishCategoryEO.LAST_UPDATE_DATE, 
+       NodDishCategoryEO.LAST_UPDATE_BY"
+  FromList="nod_dish_category NodDishCategoryEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full">
+  <EntityUsage
+    Name="NodDishCategoryEO"
+    Entity="model.entity.NodDishCategoryEO"/>
+  <ViewAttribute
+    Name="DishCategoryId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DishCategoryId"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="DISH_CATEGORY_ID"/>
+  <ViewAttribute
+    Name="DishCategoryName"
+    PrecisionRule="true"
+    EntityAttrName="DishCategoryName"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="DISH_CATEGORY_NAME"/>
+  <ViewAttribute
+    Name="DishCategoryDesc"
+    PrecisionRule="true"
+    EntityAttrName="DishCategoryDesc"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="DISH_CATEGORY_DESC"/>
+  <ViewAttribute
+    Name="Segment1"
+    PrecisionRule="true"
+    EntityAttrName="Segment1"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="SEGMENT1"/>
+  <ViewAttribute
+    Name="CreateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreateDate"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="CREATE_DATE"/>
+  <ViewAttribute
+    Name="CreateBy"
+    PrecisionRule="true"
+    EntityAttrName="CreateBy"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="CREATE_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateBy"
+    EntityUsage="NodDishCategoryEO"
+    AliasName="LAST_UPDATE_BY"/>
+</ViewObject>

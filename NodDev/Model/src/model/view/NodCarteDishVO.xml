@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NodCarteDishVO"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  SelectList="NodCarteDishEO.CARTE_DISH_ID, 
+       NodCarteDishEO.CARTE_ID, 
+       NodCarteDishEO.DISH_ID, 
+       NodCarteDishEO.CREATE_DATE, 
+       NodCarteDishEO.CREATE_BY, 
+       NodCarteDishEO.LAST_UPDATE_DATE, 
+       NodCarteDishEO.LAST_UPDATE_BY"
+  FromList="nod_carte_dish NodCarteDishEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full">
+  <EntityUsage
+    Name="NodCarteDishEO"
+    Entity="model.entity.NodCarteDishEO"/>
+  <ViewAttribute
+    Name="CarteDishId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CarteDishId"
+    EntityUsage="NodCarteDishEO"
+    AliasName="CARTE_DISH_ID"/>
+  <ViewAttribute
+    Name="CarteId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CarteId"
+    EntityUsage="NodCarteDishEO"
+    AliasName="CARTE_ID"/>
+  <ViewAttribute
+    Name="DishId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DishId"
+    EntityUsage="NodCarteDishEO"
+    AliasName="DISH_ID"/>
+  <ViewAttribute
+    Name="CreateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreateDate"
+    EntityUsage="NodCarteDishEO"
+    AliasName="CREATE_DATE"/>
+  <ViewAttribute
+    Name="CreateBy"
+    PrecisionRule="true"
+    EntityAttrName="CreateBy"
+    EntityUsage="NodCarteDishEO"
+    AliasName="CREATE_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="NodCarteDishEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateBy"
+    EntityUsage="NodCarteDishEO"
+    AliasName="LAST_UPDATE_BY"/>
+</ViewObject>
