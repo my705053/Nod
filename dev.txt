@@ -1,0 +1,277 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : HomeBook
+Source Server Version : 50617
+Source Host           : 192.168.1.5:3306
+Source Database       : dev
+
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
+
+Date: 2014-05-11 21:54:25
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `nod_carte`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_carte`;
+CREATE TABLE `nod_carte` (
+  `CARTE_ID` int(11) NOT NULL,
+  `CARTE_NAME` varchar(50) DEFAULT NULL,
+  `CARTE_DESC` text,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`CARTE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_carte
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_carte_dish`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_carte_dish`;
+CREATE TABLE `nod_carte_dish` (
+  `CARTE_DISH_ID` int(11) NOT NULL,
+  `CARTE_ID` int(11) NOT NULL,
+  `DISH_ID` int(11) NOT NULL,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`CARTE_DISH_ID`),
+  KEY `CARTE_DISH_CARTE_ID_FK` (`CARTE_ID`),
+  KEY `CARTE_DISH_DISH_ID_FK` (`DISH_ID`),
+  CONSTRAINT `CARTE_DISH_CARTE_ID_FK` FOREIGN KEY (`CARTE_ID`) REFERENCES `nod_carte` (`CARTE_ID`),
+  CONSTRAINT `CARTE_DISH_DISH_ID_FK` FOREIGN KEY (`DISH_ID`) REFERENCES `nod_dish` (`DISH_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_carte_dish
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_dish`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_dish`;
+CREATE TABLE `nod_dish` (
+  `DISH_ID` int(11) NOT NULL,
+  `DISH_NAME` varchar(40) DEFAULT NULL,
+  `DISH_DESC` text,
+  `MATERIAL` text,
+  `DISH_CATEGORY_ID` int(11) DEFAULT NULL,
+  `TASTE` varchar(100) DEFAULT NULL,
+  `CALORIE` double DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  `SALES_DOWN_PRICE` double DEFAULT NULL,
+  `SALES_DOWN_FLAG` tinyint(1) DEFAULT NULL,
+  `DISH_SMALL_PICTURE` varchar(255) DEFAULT NULL,
+  `DISH_LARGE_PICTURE` varchar(255) DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `SEGMENT3` text,
+  `SEGMENT4` text,
+  `SEGMENT5` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`DISH_ID`),
+  KEY `DISH_CATEGORY_FK` (`DISH_CATEGORY_ID`),
+  CONSTRAINT `DISH_CATEGORY_FK` FOREIGN KEY (`DISH_CATEGORY_ID`) REFERENCES `nod_dish_category` (`DISH_CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_dish
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_dish_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_dish_category`;
+CREATE TABLE `nod_dish_category` (
+  `DISH_CATEGORY_ID` int(11) NOT NULL,
+  `DISH_CATEGORY_NAME` varchar(20) DEFAULT NULL,
+  `DISH_CATEGORY_DESC` text,
+  `SEGMENT1` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`DISH_CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_dish_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_order`;
+CREATE TABLE `nod_order` (
+  `ORDER_ID` int(11) NOT NULL,
+  `TABLE_ID` int(11) DEFAULT NULL,
+  `STATUS` varchar(20) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  `FINAL_PRICE` double DEFAULT NULL,
+  `ORDER_TIME` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ID`),
+  KEY `ORDER_TABLE_ID_FK` (`TABLE_ID`),
+  CONSTRAINT `ORDER_TABLE_ID_FK` FOREIGN KEY (`TABLE_ID`) REFERENCES `nod_table` (`TABLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_order_detail`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_order_detail`;
+CREATE TABLE `nod_order_detail` (
+  `ORDER_DETAIL_ID` int(11) NOT NULL,
+  `ORDER_ID` int(11) DEFAULT NULL,
+  `DISH_ID` int(11) DEFAULT NULL,
+  `DISCOUNT` double DEFAULT NULL,
+  `FINAL_PRICE` double DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_DETAIL_ID`),
+  KEY `ORDER_DETAIL_ORDER_ID_FK` (`ORDER_ID`),
+  KEY `ORDER_DETAIL_DISH_ID_FK` (`DISH_ID`),
+  CONSTRAINT `ORDER_DETAIL_DISH_ID_FK` FOREIGN KEY (`DISH_ID`) REFERENCES `nod_dish` (`DISH_ID`),
+  CONSTRAINT `ORDER_DETAIL_ORDER_ID_FK` FOREIGN KEY (`ORDER_ID`) REFERENCES `nod_order` (`ORDER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_restaurant_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_restaurant_info`;
+CREATE TABLE `nod_restaurant_info` (
+  `ID` int(11) NOT NULL,
+  `LOGO` varchar(255) DEFAULT NULL,
+  `RESTAURANT_NAME` varchar(100) NOT NULL,
+  `RESTAURANT_DESC` text,
+  `RESTAURANT_ADDRESS` varchar(200) DEFAULT NULL,
+  `RESTAURANT_PHONE1` varchar(20) DEFAULT NULL,
+  `RESTAURANT_PHONE2` varchar(20) DEFAULT NULL,
+  `RESTAURANT_PHONE3` varchar(20) DEFAULT NULL,
+  `ACTIVE_CARTE` int(11) DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `SEGMENT3` text,
+  `SEGMENT4` text,
+  `SEGMENT5` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ACTIVE_CARTE_ID` (`ACTIVE_CARTE`),
+  CONSTRAINT `ACTIVE_CARTE_ID` FOREIGN KEY (`ACTIVE_CARTE`) REFERENCES `nod_carte` (`CARTE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nod_restaurant_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_role`;
+CREATE TABLE `nod_role` (
+  `ROLE_ID` int(11) NOT NULL,
+  `ROLE_NAME` varchar(20) DEFAULT NULL,
+  `ACTIVE_FLAG` tinyint(1) DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ROLE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `nod_role` VALUES ('1', 'super', '1', null, null, '2014-05-05 20:22:18', null, '2014-05-05 20:22:18', null);
+INSERT INTO `nod_role` VALUES ('2', 'manager', '1', null, null, '2014-05-05 20:22:21', null, '2014-05-05 20:22:21', null);
+INSERT INTO `nod_role` VALUES ('3', 'user', '1', null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `nod_table`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_table`;
+CREATE TABLE `nod_table` (
+  `TABLE_ID` int(11) NOT NULL,
+  `TABLE_NAME` varchar(40) DEFAULT NULL,
+  `SEAT_COUNT` int(11) DEFAULT NULL,
+  `STATUS` varchar(20) DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`TABLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of table
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `nod_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `nod_user`;
+CREATE TABLE `nod_user` (
+  `USER_NAME` varchar(20) NOT NULL,
+  `NICK_NAME` varchar(20) NOT NULL,
+  `PASSWORD` varchar(20) NOT NULL,
+  `ROLE_ID` int(11) DEFAULT NULL,
+  `ACTIVE_FLAG` tinyint(1) DEFAULT NULL,
+  `SEGMENT1` text,
+  `SEGMENT2` text,
+  `SEGMENT3` text,
+  `SEGMENT4` text,
+  `SEGMENT5` text,
+  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_BY` varchar(20) DEFAULT NULL,
+  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`USER_NAME`),
+  KEY `USER_ROLE_FK` (`ROLE_ID`),
+  CONSTRAINT `USER_ROLE_FK` FOREIGN KEY (`ROLE_ID`) REFERENCES `nod_role` (`ROLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `nod_user` VALUES ('Manager', 'ManagerUser', 'welcome1', '2', '1', '', null, null, null, null, '2014-05-05 23:06:04', null, '2014-05-05 23:06:04', null);
+INSERT INTO `nod_user` VALUES ('SuperAdmin', 'AdminUser', 'welcome1', '1', '1', '123', null, null, null, null, '2014-05-05 23:06:04', null, '2014-05-05 23:06:04', null);
+INSERT INTO `nod_user` VALUES ('User', 'UserUser', 'welcome1', '3', '1', null, null, null, null, null, '2014-05-05 20:24:47', null, '2014-05-05 20:24:47', null);
