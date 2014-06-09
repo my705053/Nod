@@ -13,6 +13,9 @@
         ResId="model.am.OperationAM_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <ViewUsage
+    Name="NodTableVO1"
+    ViewObjectName="model.view.NodTableVO"/>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>
