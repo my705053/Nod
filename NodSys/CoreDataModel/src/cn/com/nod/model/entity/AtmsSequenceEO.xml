@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AtmsSequenceEO"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="atms_sequence"
+  AliasName="AtmsSequenceEO"
+  BindingStyle="JDBC">
+  <Attribute
+    Name="Name"
+    IsNotNull="true"
+    Precision="50"
+    ColumnName="name"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="atms_sequence"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CurrentValue"
+    IsNotNull="true"
+    ColumnName="current_value"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="atms_sequence">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Increment"
+    IsNotNull="true"
+    ColumnName="increment"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="atms_sequence">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="cn.com.nod.model.entity.AtmsSequenceEO.Name"/>
+    </AttrArray>
+  </Key>
+</Entity>

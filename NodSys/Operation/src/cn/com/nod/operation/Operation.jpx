@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Operation"
+  Version="12.1.2.66.68"
+  SeparateXMLFiles="true"
+  PackageName="cn.com.nod.operation">
+  <DesignTime>
+    <Attr Name="_useAnsiJoinSyntax" Value="true"/>
+    <Attr Name="_jprName" Value="../../../../../Operation.jpr"/>
+    <Attr Name="_jbo.SQLBuilder" Value="SQL92"/>
+    <Attr Name="_jbo.TypeMapEntries" Value="Java"/>
+    <Attr Name="_NamedConnection" Value="LocalMySQL"/>
+    <Attr Name="_appModuleNames0" Value="cn.com.nod.operation.am.OperationAM"/>
+  </DesignTime>
+  <Containee
+    Name="am"
+    PackageName="cn.com.nod.operation.am"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <AppContainee
+    Name="CoreDataModel"
+    FullName="cn.com.nod.model.CoreDataModel"
+    ObjectType="JboProject">
+    <DesignTime>
+      <Attr Name="_SourceName" Value="ADFLIB_CoreDataModel.jar"/>
+    </DesignTime>
+  </AppContainee>
+</JboProject>

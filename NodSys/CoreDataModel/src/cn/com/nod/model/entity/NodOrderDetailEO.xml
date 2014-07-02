@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="NodOrderDetailEO"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="nod_order_detail"
+  AliasName="NodOrderDetailEO"
+  BindingStyle="JDBC">
+  <Attribute
+    Name="OrderDetailId"
+    IsNotNull="true"
+    ColumnName="ORDER_DETAIL_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="nod_order_detail"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrderId"
+    ColumnName="ORDER_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DishId"
+    ColumnName="DISH_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Discount"
+    ColumnName="DISCOUNT"
+    SQLType="DOUBLE"
+    Type="java.math.BigDecimal"
+    ColumnType="DOUBLE"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FinalPrice"
+    ColumnName="FINAL_PRICE"
+    SQLType="DOUBLE"
+    Type="java.math.BigDecimal"
+    ColumnType="DOUBLE"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Segment1"
+    ColumnName="SEGMENT1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="nod_order_detail"/>
+  <Attribute
+    Name="Segment2"
+    ColumnName="SEGMENT2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="nod_order_detail"/>
+  <Attribute
+    Name="CreateDate"
+    ColumnName="CREATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="nod_order_detail"/>
+  <Attribute
+    Name="CreateBy"
+    Precision="20"
+    ColumnName="CREATE_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="nod_order_detail"/>
+  <Attribute
+    Name="LastUpdateBy"
+    Precision="20"
+    ColumnName="LAST_UPDATE_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="nod_order_detail">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="cn.com.nod.model.entity.NodOrderDetailEO.OrderDetailId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="OrderDetailDishIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="ORDER_DETAIL_DISH_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="cn.com.nod.model.entity.NodOrderDetailEO.DishId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="OrderDetailOrderIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="ORDER_DETAIL_ORDER_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="cn.com.nod.model.entity.NodOrderDetailEO.OrderId"/>
+    </AttrArray>
+  </Key>
+</Entity>

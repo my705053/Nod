@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CoreDataModel"
+  Version="12.1.2.66.68"
+  SeparateXMLFiles="true"
+  PackageName="cn.com.nod.model">
+  <DesignTime>
+    <Attr Name="_useAnsiJoinSyntax" Value="true"/>
+    <Attr Name="_jprName" Value="../../../../../CoreDataModel.jpr"/>
+    <Attr Name="_jbo.SQLBuilder" Value="SQL92"/>
+    <Attr Name="_jbo.TypeMapEntries" Value="Java"/>
+    <Attr Name="_NamedConnection" Value="LocalMySQL"/>
+  </DesignTime>
+  <Containee
+    Name="assoc"
+    PackageName="cn.com.nod.model.assoc"
+    ObjectType="JboPackage"/>
+  <Containee
+    Name="entity"
+    PackageName="cn.com.nod.model.entity"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+</JboProject>

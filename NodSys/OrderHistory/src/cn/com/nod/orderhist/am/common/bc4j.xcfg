@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="cn.com.nod.orderhist.am.OrderHistoryAM">
+      <AppModuleConfig name="OrderHistoryAMLocal" ApplicationName="cn.com.nod.orderhist.am.OrderHistoryAM" DeployPlatform="LOCAL" jbo.project="cn.com.nod.orderhist.OrderHistory">
+         <Database jbo.sql92.JdbcDriverClass="com.mysql.jdbc.Driver" jbo.TypeMapEntries="Java" jbo.SQLBuilder="SQL92"/>
+         <Security AppModuleJndiName="cn.com.nod.orderhist.am.OrderHistoryAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/LocalMySQLDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="OrderHistoryAMShared" ApplicationName="cn.com.nod.orderhist.am.OrderHistoryAM" DeployPlatform="LOCAL" jbo.project="cn.com.nod.orderhist.OrderHistory">
+         <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.sql92.JdbcDriverClass="com.mysql.jdbc.Driver" jbo.TypeMapEntries="Java" jbo.SQLBuilder="SQL92"/>
+         <Security AppModuleJndiName="cn.com.nod.orderhist.am.OrderHistoryAM"/>
+         <Custom ns0:JDBCDataSource="java:comp/env/jdbc/LocalMySQLDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

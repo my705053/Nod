@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CarteMaintenanceAM"
+  Version="12.1.2.66.68"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="cn.com.nod.carte.am.CarteMaintenanceAM_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="cn.com.nod.carte.CarteMaintenanceBundle"/>
+  </ResourceBundle>
+</AppModule>
