@@ -1,19 +1,44 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : HomeBook
-Source Server Version : 50617
-Source Host           : 192.168.1.5:3306
+Source Server         : Local
+Source Server Version : 50616
+Source Host           : localhost:3306
 Source Database       : dev
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2014-05-11 21:54:25
+Date: 2014-07-02 23:12:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `atms_sequence`
+-- ----------------------------
+DROP TABLE IF EXISTS `atms_sequence`;
+CREATE TABLE `atms_sequence` (
+  `name` varchar(50) NOT NULL,
+  `current_value` int(11) NOT NULL,
+  `increment` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of atms_sequence
+-- ----------------------------
+INSERT INTO `atms_sequence` VALUES ('nod_carte_dish_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_carte_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_dish_category_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_dish_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_order_detail_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_order_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_restaurant_info_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_role_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_table_seq', '0', '1');
+INSERT INTO `atms_sequence` VALUES ('nod_user_seq', '0', '1');
 
 -- ----------------------------
 -- Table structure for `nod_carte`
@@ -22,12 +47,12 @@ DROP TABLE IF EXISTS `nod_carte`;
 CREATE TABLE `nod_carte` (
   `CARTE_ID` int(11) NOT NULL,
   `CARTE_NAME` varchar(50) DEFAULT NULL,
-  `CARTE_DESC` text,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CARTE_DESC` varchar(80) DEFAULT NULL,
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`CARTE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -44,9 +69,9 @@ CREATE TABLE `nod_carte_dish` (
   `CARTE_DISH_ID` int(11) NOT NULL,
   `CARTE_ID` int(11) NOT NULL,
   `DISH_ID` int(11) NOT NULL,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`CARTE_DISH_ID`),
   KEY `CARTE_DISH_CARTE_ID_FK` (`CARTE_ID`),
@@ -76,14 +101,14 @@ CREATE TABLE `nod_dish` (
   `SALES_DOWN_FLAG` tinyint(1) DEFAULT NULL,
   `DISH_SMALL_PICTURE` varchar(255) DEFAULT NULL,
   `DISH_LARGE_PICTURE` varchar(255) DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `SEGMENT3` text,
-  `SEGMENT4` text,
-  `SEGMENT5` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `SEGMENT3` varchar(20) DEFAULT NULL,
+  `SEGMENT4` varchar(50) DEFAULT NULL,
+  `SEGMENT5` varchar(50) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`DISH_ID`),
   KEY `DISH_CATEGORY_FK` (`DISH_CATEGORY_ID`),
@@ -101,11 +126,11 @@ DROP TABLE IF EXISTS `nod_dish_category`;
 CREATE TABLE `nod_dish_category` (
   `DISH_CATEGORY_ID` int(11) NOT NULL,
   `DISH_CATEGORY_NAME` varchar(20) DEFAULT NULL,
-  `DISH_CATEGORY_DESC` text,
-  `SEGMENT1` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `DISH_CATEGORY_DESC` varchar(0) DEFAULT NULL,
+  `SEGMENT1` varchar(0) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`DISH_CATEGORY_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -124,12 +149,12 @@ CREATE TABLE `nod_order` (
   `STATUS` varchar(20) DEFAULT NULL,
   `PRICE` double DEFAULT NULL,
   `FINAL_PRICE` double DEFAULT NULL,
-  `ORDER_TIME` timestamp default '0000-00-00 00:00:00',
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `ORDER_TIME` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ORDER_ID`),
   KEY `ORDER_TABLE_ID_FK` (`TABLE_ID`),
@@ -150,11 +175,11 @@ CREATE TABLE `nod_order_detail` (
   `DISH_ID` int(11) DEFAULT NULL,
   `DISCOUNT` double DEFAULT NULL,
   `FINAL_PRICE` double DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(0) DEFAULT NULL,
+  `SEGMENT2` varchar(0) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ORDER_DETAIL_ID`),
   KEY `ORDER_DETAIL_ORDER_ID_FK` (`ORDER_ID`),
@@ -175,20 +200,20 @@ CREATE TABLE `nod_restaurant_info` (
   `ID` int(11) NOT NULL,
   `LOGO` varchar(255) DEFAULT NULL,
   `RESTAURANT_NAME` varchar(100) NOT NULL,
-  `RESTAURANT_DESC` text,
+  `RESTAURANT_DESC` varchar(500) DEFAULT NULL,
   `RESTAURANT_ADDRESS` varchar(200) DEFAULT NULL,
   `RESTAURANT_PHONE1` varchar(20) DEFAULT NULL,
   `RESTAURANT_PHONE2` varchar(20) DEFAULT NULL,
   `RESTAURANT_PHONE3` varchar(20) DEFAULT NULL,
   `ACTIVE_CARTE` int(11) DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `SEGMENT3` text,
-  `SEGMENT4` text,
-  `SEGMENT5` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `SEGMENT3` varchar(20) DEFAULT NULL,
+  `SEGMENT4` varchar(20) DEFAULT NULL,
+  `SEGMENT5` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ACTIVE_CARTE_ID` (`ACTIVE_CARTE`),
@@ -207,21 +232,21 @@ CREATE TABLE `nod_role` (
   `ROLE_ID` int(11) NOT NULL,
   `ROLE_NAME` varchar(20) DEFAULT NULL,
   `ACTIVE_FLAG` tinyint(1) DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ROLE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of role
+-- Records of nod_role
 -- ----------------------------
 INSERT INTO `nod_role` VALUES ('1', 'super', '1', null, null, '2014-05-05 20:22:18', null, '2014-05-05 20:22:18', null);
 INSERT INTO `nod_role` VALUES ('2', 'manager', '1', null, null, '2014-05-05 20:22:21', null, '2014-05-05 20:22:21', null);
-INSERT INTO `nod_role` VALUES ('3', 'user', '1', null, null, null, null, null, null);
+INSERT INTO `nod_role` VALUES ('3', 'user', '1', null, null, '2014-05-24 12:33:24', null, '2014-05-24 12:33:24', null);
 
 -- ----------------------------
 -- Table structure for `nod_table`
@@ -232,18 +257,30 @@ CREATE TABLE `nod_table` (
   `TABLE_NAME` varchar(40) DEFAULT NULL,
   `SEAT_COUNT` int(11) DEFAULT NULL,
   `STATUS` varchar(20) DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`TABLE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of table
+-- Records of nod_table
 -- ----------------------------
+INSERT INTO `nod_table` VALUES ('1', '1号', '4', '1', null, null, '2014-05-24 12:58:30', null, '2014-06-01 15:25:52', null);
+INSERT INTO `nod_table` VALUES ('2', '2号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:58:53', null);
+INSERT INTO `nod_table` VALUES ('3', '3号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:58:55', null);
+INSERT INTO `nod_table` VALUES ('4', '4号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:58:57', null);
+INSERT INTO `nod_table` VALUES ('5', '5号', '4', '1', null, null, '2014-05-24 12:58:30', null, '2014-06-01 15:25:53', null);
+INSERT INTO `nod_table` VALUES ('6', '6号', '4', '1', null, null, '2014-05-24 12:58:30', null, '2014-06-01 15:25:55', null);
+INSERT INTO `nod_table` VALUES ('7', '7号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:59:04', null);
+INSERT INTO `nod_table` VALUES ('8', '8号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:59:07', null);
+INSERT INTO `nod_table` VALUES ('9', '9号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:59:09', null);
+INSERT INTO `nod_table` VALUES ('10', '10号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:59:11', null);
+INSERT INTO `nod_table` VALUES ('11', '11号', '4', '1', null, null, '2014-05-24 12:58:30', null, '2014-06-01 15:25:57', null);
+INSERT INTO `nod_table` VALUES ('12', '12号', '4', '0', null, null, '2014-05-24 12:58:30', null, '2014-05-24 12:59:17', null);
 
 -- ----------------------------
 -- Table structure for `nod_user`
@@ -255,14 +292,14 @@ CREATE TABLE `nod_user` (
   `PASSWORD` varchar(20) NOT NULL,
   `ROLE_ID` int(11) DEFAULT NULL,
   `ACTIVE_FLAG` tinyint(1) DEFAULT NULL,
-  `SEGMENT1` text,
-  `SEGMENT2` text,
-  `SEGMENT3` text,
-  `SEGMENT4` text,
-  `SEGMENT5` text,
-  `CREATE_DATE` timestamp default '0000-00-00 00:00:00',
+  `SEGMENT1` varchar(20) DEFAULT NULL,
+  `SEGMENT2` varchar(20) DEFAULT NULL,
+  `SEGMENT3` varchar(20) DEFAULT NULL,
+  `SEGMENT4` varchar(20) DEFAULT NULL,
+  `SEGMENT5` varchar(20) DEFAULT NULL,
+  `CREATE_DATE` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `CREATE_BY` varchar(20) DEFAULT NULL,
-  `LAST_UPDATE_DATE` timestamp default now() on update now(),
+  `LAST_UPDATE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `LAST_UPDATE_BY` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`USER_NAME`),
   KEY `USER_ROLE_FK` (`ROLE_ID`),
@@ -270,8 +307,58 @@ CREATE TABLE `nod_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user
+-- Records of nod_user
 -- ----------------------------
 INSERT INTO `nod_user` VALUES ('Manager', 'ManagerUser', 'welcome1', '2', '1', '', null, null, null, null, '2014-05-05 23:06:04', null, '2014-05-05 23:06:04', null);
 INSERT INTO `nod_user` VALUES ('SuperAdmin', 'AdminUser', 'welcome1', '1', '1', '123', null, null, null, null, '2014-05-05 23:06:04', null, '2014-05-05 23:06:04', null);
 INSERT INTO `nod_user` VALUES ('User', 'UserUser', 'welcome1', '3', '1', null, null, null, null, null, '2014-05-05 20:24:47', null, '2014-05-05 20:24:47', null);
+
+-- ----------------------------
+-- Function structure for `currval`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `currval`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `currval`(seq_name VARCHAR(50)) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+         DECLARE value INTEGER;
+         SET value = 0;
+         SELECT current_value INTO value
+                   FROM atms_sequence
+                   WHERE name = seq_name;
+         RETURN value;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `nextval`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `nextval`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `nextval`(seq_name VARCHAR(50)) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+         UPDATE atms_sequence
+                   SET current_value = current_value + increment
+                   WHERE name = seq_name;
+         RETURN currval(seq_name);
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `setval`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `setval`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `setval`(seq_name VARCHAR(50), value INTEGER) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+         UPDATE atms_sequence
+                   SET current_value = value
+                   WHERE name = seq_name;
+         RETURN currval(seq_name);
+END
+;;
+DELIMITER ;
